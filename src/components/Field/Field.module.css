@@ -1,0 +1,41 @@
+:root {
+	--gap: 10px;
+}
+
+.fieldBlock {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: var(--gap);
+	width: 100%;
+	height: 75%;
+	background: none;
+}
+
+.col {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(33% - var(--gap) * 2);
+	height: calc(33% - var(--gap) * 2);
+	border-radius: 8px;
+	border: 1px solid #171d23;
+	background: linear-gradient(to bottom, #171d23 0%, #101419 100%);
+	box-shadow: 0 0 5px #0008;
+	color: white;
+	cursor: pointer;
+	font-family: monospace;
+	font-size: 5rem;
+	user-select: none;
+	transition: 0.2s;
+}
+
+.col:hover:not(:active) {
+	filter: brightness(1.2);
+}
+
+.col:active {
+	box-shadow: 0 0 7px #0008 inset;
+}

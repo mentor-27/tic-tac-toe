@@ -1,0 +1,36 @@
+.app {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 450px;
+	height: 600px;
+	margin: 100px auto;
+	padding: 32px 16px;
+	border: 1px solid #171d23;
+	background: linear-gradient(to bottom, #171d23 0%, #101419 100%);
+	border-radius: 16px;
+}
+
+.restartButton {
+	width: 90%;
+	height: 10%;
+	background: linear-gradient(0deg, #151c22, #232f40);
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 0 5px #283546 inset;
+	color: #495c72;
+	font-size: 2rem;
+	font-weight: 600;
+	cursor: pointer;
+	outline: none;
+	transition: 0.2s;
+}
+
+.restartButton:hover:not(:active) {
+	filter: brightness(1.2);
+}
+
+.restartButton:active {
+	box-shadow: 0 0 5px #000c inset;
+}

@@ -1,0 +1,13 @@
+.infoBlock {
+	display: flex;
+	flex-direction: column;
+	line-height: 2rem;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 15%;
+	color: #6f9fc8;
+	font-size: 3rem;
+	font-weight: 600;
+	text-align: center;
+}
