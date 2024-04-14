@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { checkWinner } from '../../utils/utils';
+import { store } from '../../store';
 import styles from './Field.module.css';
 
 export const Field = props => {
@@ -8,15 +9,12 @@ export const Field = props => {
 		props.currentPlayer === 'X'
 			? props.setCurrentPlayer('O')
 			: props.setCurrentPlayer('X');
-		props.setField(prev => {
-			const newField = prev.with(+e.target.dataset.pos, props.currentPlayer);
-			const isWin = checkWinner(newField);
-			if (isWin === 'X' || isWin === 'O') {
-				props.setIsGameEnded(true);
-				props.setCurrentPlayer(isWin);
-			} else if (isWin === 'draw') props.setIsDraw(true);
-			return newField;
-		});
+		store.dispatch({ type: props.currentPlayer, payload: +e.target.dataset.pos });
+		const isWin = checkWinner(store.getState());
+		if (isWin === 'X' || isWin === 'O') {
+			props.setIsGameEnded(true);
+			props.setCurrentPlayer(isWin);
+		} else if (isWin === 'draw') props.setIsDraw(true);
 	};
 	return <FieldLayout field={props.field} clickHandler={handleClick} />;
 };
@@ -24,7 +22,7 @@ export const Field = props => {
 const FieldLayout = props => {
 	return (
 		<div className={styles.fieldBlock}>
-			{props.field.map((item, index) => (
+			{store.getState().map((item, index) => (
 				<div
 					key={`${index}_${Date.now()}`}
 					onClick={props.clickHandler}
