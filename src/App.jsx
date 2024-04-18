@@ -5,20 +5,21 @@ import { store } from './store';
 import styles from './App.module.css';
 
 export default function App() {
+	const [render, setRender] = useState(false);
 	const [currentPlayer, setCurrentPlayer] = useState('X');
 	const [isGameEnded, setIsGameEnded] = useState(false);
 	const [isDraw, setIsDraw] = useState(false);
 
-	let statusSign = '';
+	let statusSign = `Ходит: ${currentPlayer}`;
 	if (isDraw) statusSign = 'Ничья';
 	else if (!isDraw && isGameEnded) statusSign = `Победа: ${currentPlayer}`;
-	else if (!isDraw && !isGameEnded) statusSign = `Ходит: ${currentPlayer}`;
 
 	function reset() {
 		store.dispatch({ type: 'RESET' });
 		setCurrentPlayer('X');
 		setIsGameEnded(false);
 		setIsDraw(false);
+		setRender(!render);
 	}
 
 	const props = {
