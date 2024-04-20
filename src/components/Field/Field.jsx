@@ -37,17 +37,16 @@ const FieldLayout = props => {
 };
 
 Field.propTypes = {
-	field: PropTypes.array,
-	setField: PropTypes.func,
+	currentPlayer: PropTypes.string,
+	setCurrentPlayer: PropTypes.func,
 	isGameEnded: PropTypes.bool,
 	setIsGameEnded: PropTypes.func,
 	isDraw: PropTypes.bool,
 	setIsDraw: PropTypes.func,
-	currentPlayer: PropTypes.string,
-	setCurrentPlayer: PropTypes.func,
+	statusSign: PropTypes.string,
+	reset: PropTypes.func,
 };
 
 FieldLayout.propTypes = {
-	field: PropTypes.array,
 	clickHandler: PropTypes.func,
 };

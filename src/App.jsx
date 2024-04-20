@@ -49,10 +49,12 @@ function AppLayout(props) {
 }
 
 AppLayout.propTypes = {
-	statusSign: PropTypes.string,
 	currentPlayer: PropTypes.string,
 	setCurrentPlayer: PropTypes.func,
 	isGameEnded: PropTypes.bool,
 	setIsGameEnded: PropTypes.func,
 	isDraw: PropTypes.bool,
+	setIsDraw: PropTypes.func,
+	statusSign: PropTypes.string,
+	reset: PropTypes.func,
 };
