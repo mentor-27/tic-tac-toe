@@ -1,31 +1,35 @@
 import PropTypes from 'prop-types';
 import { checkWinner } from '../../utils/utils';
 import { store } from '../../store';
-import { useSelector } from 'react-redux';
-import { setPlayer, GAME_OVER, DRAW } from '../../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlayer, setField, GAME_OVER, DRAW } from '../../actions';
+import {
+	selectField,
+	selectCurrentPlayer,
+	selectGameOver,
+	selectIsDraw,
+} from '../../selectors';
 import styles from './Field.module.css';
 
 export const Field = () => {
-	const currentPlayer = useSelector(store => store.currentPlayer);
-	const gameOver = useSelector(store => store.gameOver);
-	const isDraw = useSelector(store => store.isDraw);
+	const dispatch = useDispatch();
+	const field = useSelector(selectField);
+	const currentPlayer = useSelector(selectCurrentPlayer);
+	const gameOver = useSelector(selectGameOver);
+	const isDraw = useSelector(selectIsDraw);
 
 	const handleClick = e => {
 		if (e.target.textContent || gameOver || isDraw) return;
-
-		currentPlayer === 'X'
-			? store.dispatch(setPlayer('O'))
-			: store.dispatch(setPlayer('X'));
-
-		store.dispatch({ type: currentPlayer, payload: +e.target.dataset.pos });
+		currentPlayer === 'X' ? dispatch(setPlayer('O')) : dispatch(setPlayer('X'));
+		dispatch(setField(currentPlayer, +e.target.dataset.pos));
 
 		const isWin = checkWinner(store.getState().field);
 
 		if (isWin === currentPlayer) {
-			store.dispatch(GAME_OVER);
-			store.dispatch(setPlayer(isWin));
+			dispatch(setPlayer(isWin));
+			dispatch(GAME_OVER);
 		} else if (isWin === 'draw') {
-			store.dispatch(DRAW);
+			dispatch(DRAW);
 		}
 	};
 
@@ -35,15 +39,15 @@ export const Field = () => {
 			? `Победа: ${currentPlayer}`
 			: `Ходит: ${currentPlayer}`;
 
-	return <FieldLayout statusSign={statusSign} clickHandler={handleClick} />;
+	return <FieldLayout field={field} statusSign={statusSign} clickHandler={handleClick} />;
 };
 
-const FieldLayout = ({ statusSign, clickHandler }) => {
+const FieldLayout = ({ field, statusSign, clickHandler }) => {
 	return (
 		<>
 			<div className={styles.infoBlock}>{statusSign}</div>
 			<div className={styles.fieldBlock}>
-				{store.getState().field.map((item, index) => (
+				{field.map((item, index) => (
 					<div
 						key={`${index}_${Date.now()}`}
 						onClick={clickHandler}

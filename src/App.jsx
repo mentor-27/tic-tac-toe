@@ -1,13 +1,15 @@
 import { Field } from './components/Field/Field';
-import { store } from './store';
 import { RESET } from './actions';
 import styles from './App.module.css';
+import { useDispatch } from 'react-redux';
 
 export default function App() {
+	const dispatch = useDispatch();
+
 	return (
 		<div className={styles.app}>
 			<Field />
-			<button onClick={() => store.dispatch(RESET)} className={styles.restartButton}>
+			<button onClick={() => dispatch(RESET)} className={styles.restartButton}>
 				RESTART
 			</button>
 		</div>
