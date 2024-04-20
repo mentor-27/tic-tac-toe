@@ -12,4 +12,5 @@ export const checkWinner = field => {
 	if (xWin) return 'X';
 	if (oWin) return 'O';
 	if (draw) return 'draw';
+	return null;
 };
