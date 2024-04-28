@@ -9,7 +9,6 @@ import {
 	selectGameOver,
 	selectIsDraw,
 } from '../../selectors';
-import styles from './Field.module.css';
 
 class OldFieldContainer extends Component {
 	handleClick = e => {
@@ -41,13 +40,15 @@ class OldFieldContainer extends Component {
 
 		return (
 			<>
-				<div className={styles.infoBlock}>{this.statusSign}</div>
-				<div className={styles.fieldBlock}>
+				<div className="flex flex-col justify-center h-1/6 w-full text-5xl leading-8 text-center font-semibold text-ttl-txt-col items-center">
+					{this.statusSign}
+				</div>
+				<div className="flex h-3/4 w-full bg-none content-center items-center flex-wrap justify-center gap-10px">
 					{this.props.field.map((item, index) => (
 						<div
 							key={`${index}_${Date.now()}`}
 							onClick={this.handleClick}
-							className={styles.col}
+							className="flex items-center justify-center w-col-size aspect-square text-8xl font-mono text-white bg-gradient-to-b from-bg-top to-bg-btm border border-brd-col rounded-lg shadow-col-shadow hover:brightness-125 active:shadow-col-act-shd duration-200 select-none cursor-pointer"
 							data-pos={index}
 						>
 							{item}
